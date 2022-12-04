@@ -1,6 +1,6 @@
 from torch.utils.data import DataLoader
 from .clevr_object import ClevrObjectDataset
-
+from .basketball_object import BasketballtDataset
 
 def get_dataset(opt, split):
     if opt.dataset == 'clevr':
@@ -17,12 +17,21 @@ def get_dataset(opt, split):
             raise ValueError('Invalid dataset split11: %s' % split)
     elif opt.dataset == 'basketball':
         if split == 'train':
+<<<<<<< HEAD
             pass
         elif split == 'val': 
             
             pass
+=======
+            ds = BasketballtDataset(opt.basketball_ann_path, opt.basketball_img_dir,split='train',
+                                    max_img_id=opt.split_id, concat_img=opt.concat_img)
+        elif split == 'val':
+            ds = BasketballtDataset(opt.basketball_ann_path, opt.basketball_img_dir,split='val',
+                                    min_img_id=opt.split_id, concat_img=opt.concat_img)
+>>>>>>> 9629b37d69dc7e39f9b74dc073552063ad581122
         elif split == 'test':
-            pass
+            ds = BasketballtDataset(opt.basketball_ann_path, opt.basketball_img_dir,split='val',
+                                    min_img_id=opt.split_id, concat_img=opt.concat_img)
         else:
             raise ValueError('Invalid dataset split: %s' % split)
     return ds   
