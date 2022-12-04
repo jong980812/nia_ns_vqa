@@ -8,7 +8,7 @@ from torch.utils.data import Dataset
 import torchvision.transforms as transforms
 import pycocotools.mask as mask_util
 
-class ClevrObjectDataset(Dataset):
+class BasketballtDataset(Dataset):
 
     def __init__(self, obj_ann_path, img_dir, split, 
                  min_img_id=None, max_img_id=None, concat_img=True):

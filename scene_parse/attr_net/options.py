@@ -1,6 +1,6 @@
 import argparse
 import os
-import utils as utils
+import scene_parse.attr_net.tools.utils as utils
 import torch
 
 
@@ -22,7 +22,7 @@ class BaseOptions():
         self.parser.add_argument('--concat_img', default=1, type=int, help='concatenate original image when sent to network')
         self.parser.add_argument('--split_id', default=3500, type=int, help='splitting index between train and val images')
         self.parser.add_argument('--batch_size', default=50, type=int, help='batch size')
-        self.parser.add_argument('--num_workers', default=8, type=int, help='number of workers for loading')
+        self.parser.add_argument('--num_workers', default=4, type=int, help='number of workers for loading')
         self.parser.add_argument('--learning_rate', default=0.002, type=float, help='learning rate')
 
         self.initialized = True
@@ -69,7 +69,7 @@ class TrainOptions(BaseOptions):
 
     def initialize(self):
         BaseOptions.initialize(self)
-        self.parser.add_argument('--num_iters', default=30000, type=int, help='total number of iterations')
+        self.parser.add_argument('--num_iters', default=100000, type=int, help='total number of iterations')
         self.parser.add_argument('--display_every', default=20, type=int, help='display training information every N iterations')
         self.parser.add_argument('--checkpoint_every', default=2000, type=int, help='save every N iterations')
         self.parser.add_argument('--shuffle_data', default=1, type=int, help='shuffle dataloader')
