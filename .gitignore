@@ -7,3 +7,4 @@ read_pkl.py
 *.err
 *.pth
 mask_rcnn/
+*.pyc

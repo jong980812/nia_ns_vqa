@@ -58,8 +58,9 @@ class Trainer:
                     self.model.save_checkpoint('%s/checkpoint_iter%08d.pt' %
                                                 (self.run_dir, t))
                     self.model.save_checkpoint(os.path.join(self.run_dir, 'checkpoint.pt'))
-                    # with open('%s/stats.json' % self.run_dir, 'w') as fout:
-                    #     json.dump(self.stats, fout)
+                    with open('%s/stats.json' % self.run_dir, 'w') as fout:
+                        json_errors = {k: str(v) for k, v in self.stats.items()}
+                        json.dump(json_errors, fout)
 
                 if t >= self.num_iters:
                     break
@@ -74,7 +75,7 @@ class Trainer:
             loss += self.model.get_loss()
             t += 1
         self.model.train_mode()
-        return loss / t if t is not 0 else 0
+        return loss / t if t != 0 else 0
 
 
 def get_trainer(opt, model, train_loader, val_loader=None):
