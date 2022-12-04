@@ -12,17 +12,21 @@ class BaseOptions():
         
     def initialize(self):
         self.parser.add_argument('--run_dir', default='scratch/test_run', type=str, help='experiment directory')
-        self.parser.add_argument('--dataset', default='clevr', type=str, help='dataset')
+        self.parser.add_argument('--dataset', default='clevr', type=str, help='dataset',choices=["clever,basketball"])
         self.parser.add_argument('--load_checkpoint_path', default=None, type=str, help='load checkpoint path')
         self.parser.add_argument('--gpu_ids', default='0', type=str, help='ids of gpu to be used')
 
         self.parser.add_argument('--clevr_mini_img_dir', default='../../data/raw/CLEVR_mini/images', type=str, help='clevr-mini image directory')
         self.parser.add_argument('--clevr_mini_ann_path', default='../../data/attr_net/objects/clevr_mini_objs.json', type=str, help='clevr-mini objects annotation file')
         
+        self.parser.add_argument('--basketball_img_dir', default='', type=str, help='basketball image directory')
+        self.parser.add_argument('--basketball_ann_path', default='', type=str, help='basketball objects annotation file')
+        
+        
         self.parser.add_argument('--concat_img', default=1, type=int, help='concatenate original image when sent to network')
         self.parser.add_argument('--split_id', default=3500, type=int, help='splitting index between train and val images')
         self.parser.add_argument('--batch_size', default=50, type=int, help='batch size')
-        self.parser.add_argument('--num_workers', default=4, type=int, help='number of workers for loading')
+        self.parser.add_argument('--num_workers', default=8, type=int, help='number of workers for loading')
         self.parser.add_argument('--learning_rate', default=0.002, type=float, help='learning rate')
 
         self.initialized = True
