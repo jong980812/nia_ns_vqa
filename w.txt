@@ -1,0 +1,9 @@
+python tools/run_test.py \
+    --run_dir /data/jongseo/lab/ns-vqa/data/results/attr/test \
+    --dataset clevr \
+    --load_checkpoint_path /data/jongseo/lab/ns-vqa/data/results/attr/checkpoint_best.pt \
+    --clevr_val_img_dir /local_datasets/CLEVR/raw/CLEVR_mini/images \
+    --clevr_val_ann_path /data/jongseo/lab/ns-vqa/clevr_mini_obj.json \
+    --clevr_mini_img_dir /local_datasets/CLEVR/raw/CLEVR_mini/images \
+    --clevr_mini_ann_path /data/jongseo/lab/ns-vqa/clevr_mini_obj.json \
+    --output_path /data/jongseo/lab/ns-vqa/data/results/attr/test/test.json

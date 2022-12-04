@@ -8,11 +8,11 @@ def get_dataset(opt, split):
             ds = ClevrObjectDataset(opt.clevr_mini_ann_path, opt.clevr_mini_img_dir, 'mini',
                                     max_img_id=opt.split_id, concat_img=opt.concat_img)
         elif split == 'val':
-            ds = ClevrObjectDataset(opt.clevr_mini_ann_path, opt.clevr_mini_img_dir, 'mini',
+            ds = ClevrObjectDataset(opt.clevr_val_ann_path, opt.clevr_val_img_dir, 'mini',
                                     min_img_id=opt.split_id, concat_img=opt.concat_img)
         elif split == 'test':
             ds = ClevrObjectDataset(
-                opt.clevr_val_ann_path, opt.clevr_val_img_dir, 'val', concat_img=opt.concat_img)
+                opt.clevr_val_ann_path, opt.clevr_val_img_dir, 'mini', concat_img=opt.concat_img)
         else:
             raise ValueError('Invalid dataset split11: %s' % split)
     elif opt.dataset == 'basketball':

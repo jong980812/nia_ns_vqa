@@ -8,3 +8,4 @@ read_pkl.py
 *.pth
 mask_rcnn/
 *.pyc
+w.txt

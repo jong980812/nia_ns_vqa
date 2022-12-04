@@ -4,7 +4,7 @@ import json
 import argparse
 import pickle
 import pycocotools.mask as mask_util
-import utils as utils_parse.attr_net.tools.utils as utils
+import utils as utils
 
 
 parser = argparse.ArgumentParser()

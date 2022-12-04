@@ -1,17 +1,18 @@
 import os
 import json
-
-from scene_parse.attr_net.tools.options import get_options
+import sys
+sys.path.append("/data/jongseo/lab/ns-vqa/scene_parse/attr_net")
+from options import get_options
 from datasets import get_dataloader
 from model import get_model
-import scene_parse.attr_net.utils as utils_parse.attr_net.tools.utils as utils
+import utils as utils
 
 
 COMP_CAT_DICT_PATH = 'tools/clevr_comp_cat_dict.json'
 
 
 opt = get_options('test')
-test_loader = get_dataloader(opt, 'test')
+test_loader = get_dataloader(opt, 'val')
 model = get_model(opt)
 
 if opt.use_cat_label:
@@ -21,7 +22,7 @@ if opt.use_cat_label:
 if opt.dataset == 'clevr':
     scenes = [{
         'image_index': i,
-        'image_filename': 'CLEVR_val_%06d.png' % i,
+        'image_filename': 'CLEVR_mini_%06d.png' % i,
         'objects': []
     } for i in range(15000)]
 

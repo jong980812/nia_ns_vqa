@@ -28,7 +28,7 @@ class BasketballtDataset(Dataset):
 
         self.obj_masks = anns['object_masks'][min_id: max_id]
         self.img_ids = anns['image_idxs'][min_id: max_id]
-        self.cat_ids = anns['category_idxs'][min_id: max_id]
+        #self.cat_ids = anns['category_idxs'][min_id: max_id]
         if anns['feature_vectors'] != []: #@ feature vec을 np.array로 바꿔줌.
             self.feat_vecs = np.array(anns['feature_vectors'][min_id: max_id]).astype(float)
         else:
@@ -49,7 +49,7 @@ class BasketballtDataset(Dataset):
         if self.feat_vecs is not None:
             label = torch.Tensor(self.feat_vecs[idx])
         img_id = self.img_ids[idx]
-        cat_id = self.cat_ids[idx]
+        #cat_id = self.cat_ids[idx]
        
 ##########! 마스크는 박스로 불러와서 후처리. ####################################
         # mask = torch.Tensor(mask_util.decode(self.obj_masks[idx]))
@@ -71,4 +71,4 @@ class BasketballtDataset(Dataset):
             data = img.clone().resize_.fill_(0)
             data[:, :, :] = transforms.Compose(transform_list)(seg)
 
-        return data, label, img_id, cat_id
+        return data, label, img_id

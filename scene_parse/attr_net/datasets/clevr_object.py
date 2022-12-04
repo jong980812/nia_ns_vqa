@@ -13,7 +13,8 @@ class ClevrObjectDataset(Dataset):
     def __init__(self, obj_ann_path, img_dir, split, 
                  min_img_id=None, max_img_id=None, concat_img=True):
         with open(obj_ann_path) as f: 
-            #! 제이슨 읽는 부분.
+            #! 제이슨 읽는 부분.p
+            print(obj_ann_path)
             anns = json.load(f)
 
         # search for the object id range corresponding to the image split

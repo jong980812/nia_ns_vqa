@@ -82,7 +82,7 @@ class TestOptions(BaseOptions):
         BaseOptions.initialize(self)
         self.parser.add_argument('--split', default='val')
         self.parser.add_argument('--output_path', default='result.json', type=str, help='save path for derendered scene annotation')
-        self.parser.add_argument('--clevr_val_ann_path', default='../../data/attr_net/objects/clevr_val_objs.json', type=str, help='clevr val objects annotation file')
+        self.parser.add_argument('--clevr_val_ann_path', default='/data/jongseo/lab/ns-vqa/clevr_mini_obj.json', type=str, help='clevr val objects annotation file')
         self.parser.add_argument('--clevr_val_img_dir', default='../../data/raw/CLEVR_v1.0/images/val', type=str, help='clevr val image directory')
         self.parser.add_argument('--shuffle_data', default=0, type=int, help='shuffle dataloader')
         self.parser.add_argument('--use_cat_label', default=1, type=int, help='use object detector class label')
