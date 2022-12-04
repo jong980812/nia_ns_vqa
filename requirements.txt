@@ -1,0 +1,12 @@
+
+
+cython
+matplotlib
+numpy
+scipy
+opencv-python
+pyyaml
+packaging
+pycocotools
+tensorboardx
+h5py

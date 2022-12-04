@@ -1,0 +1,9 @@
+data/
+.vscode/
+read_pkl.py
+*.sh
+*.pkl
+*.out
+*.err
+*.pth
+mask_rcnn/

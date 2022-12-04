@@ -1,0 +1,5 @@
+python tools/test_net.py \
+    --dataset clevr_original_val \
+    --cfg configs/baselines/e2e_mask_rcnn_R-50-FPN_1x.yaml \
+    --load_ckpt /local_datasets/CLEVR/pretrained/object_detector.pt \
+    --output_dir ../../data/mask_rcnn/results/clevr_val_pretrained
