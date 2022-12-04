@@ -1,7 +1,7 @@
 import os
 import json
 import torch
-import scene_parse.attr_net.utils as utils
+import utils as utils
 
 
 class Trainer:
