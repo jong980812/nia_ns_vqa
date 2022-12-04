@@ -15,6 +15,7 @@ def get_dataset(opt, split):
                 opt.clevr_val_ann_path, opt.clevr_val_img_dir, 'val', concat_img=opt.concat_img)
         else:
             raise ValueError('Invalid dataset split11: %s' % split)
+            print("안지오")
     elif opt.dataset == 'basketball':
         if split == 'train':
             pass
