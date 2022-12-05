@@ -64,11 +64,11 @@ class BasketballtDataset(Dataset):
                           transforms.ToTensor(),
                           transforms.Normalize(mean = [0.485, 0.456, 0.406], std = [0.229, 0.224, 0.225])]
         if self.concat_img:
-            data = img.clone().resize_(6, 224, 224).fill_(0)#! 채널 늘림. 0으로 채움.
+            data = img.clone().fill_(0)#! 채널 늘림. 0으로 채움.
             data[0:3] = transforms.Compose(transform_list)(seg)
             data[3:6] = transforms.Compose(transform_list)(img)
         else:
-            data = img.clone().resize_(3, 224, 224).fill_(0)
+            data = img.clone().resize_.fill_(0)
             data[:, :, :] = transforms.Compose(transform_list)(seg)
 
         return data, label, img_id, cat_id
