@@ -28,6 +28,7 @@ class AttributeNetwork(nn.Module):
             print('| creating new model')
             output_dims = {
                 'clevr': 18,
+                'basketball':43,
             }
             self.output_dim = output_dims[opt.dataset]
             self.net = _Net(self.output_dim, self.input_channels)
@@ -90,7 +91,6 @@ class AttributeNetwork(nn.Module):
 
 
 class _Net(nn.Module):
-
     def __init__(self, output_dim, input_channels=6):
         super(_Net, self).__init__()
 
