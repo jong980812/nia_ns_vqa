@@ -7,9 +7,10 @@ import torchvision.models as models
 PYTORCH_VER = torch.__version__
 
 
-class AttributeNetwork():
+class AttributeNetwork(nn.Module):
 
     def __init__(self, opt):    
+        super(AttributeNetwork, self).__init__()
         if opt.concat_img:
             self.input_channels = 6
         else:
@@ -34,11 +35,11 @@ class AttributeNetwork():
         self.criterion = nn.MSELoss()
         self.optimizer = torch.optim.Adam(self.net.parameters(), lr=opt.learning_rate)
 
-        self.use_cuda = len(opt.gpu_ids) > 0 and torch.cuda.is_available()
-        self.gpu_ids = opt.gpu_ids
-        if self.use_cuda:
-            self.net.cuda(opt.gpu_ids[0])
-
+        # self.use_cuda = len(opt.gpu_ids) > 0 and torch.cuda.is_available()
+        # self.gpu_ids = opt.gpu_ids
+        # if self.use_cuda:
+        #     self.net.cuda(opt.gpu_ids[0])
+        self.use_cuda=True
         self.input, self.label = None, None
                 
     def set_input(self, x, y=None):
@@ -84,7 +85,7 @@ class AttributeNetwork():
 
     def _to_var(self, x):
         if self.use_cuda:
-            x = x.cuda()
+            x = x.cuda()    
         return Variable(x)
 
 

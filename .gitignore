@@ -8,3 +8,6 @@ read_pkl.py
 *.pth
 mask_rcnn/
 *.pyc
+.vscode/
+results/
+*.txt
