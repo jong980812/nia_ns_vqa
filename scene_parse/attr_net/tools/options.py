@@ -77,9 +77,9 @@ class TrainOptions(BaseOptions):
 
     def initialize(self):
         BaseOptions.initialize(self)
-        self.parser.add_argument('--num_iters', default=100000, type=int, help='total number of iterations')
+        self.parser.add_argument('--num_iters', default=100, type=int, help='total number of iterations')
         self.parser.add_argument('--display_every', default=20, type=int, help='display training information every N iterations')
-        self.parser.add_argument('--checkpoint_every', default=2000, type=int, help='save every N iterations')
+        self.parser.add_argument('--checkpoint_every', default=20, type=int, help='save every N iterations')
         self.parser.add_argument('--shuffle_data', default=1, type=int, help='shuffle dataloader')
         self.is_train = True
 

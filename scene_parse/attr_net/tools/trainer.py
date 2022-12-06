@@ -11,7 +11,7 @@ class Trainer:
         self.run_dir = opt.run_dir
         self.display_every = opt.display_every
         self.checkpoint_every = opt.checkpoint_every
-
+        self.opt=opt
         self.train_loader = train_loader
         self.val_loader = val_loader
         self.model = model
@@ -51,13 +51,13 @@ class Trainer:
                             print('| best model')
                             self.stats['best_val_loss'] = val_loss
                             self.stats['model_t'] = t
-                            self.model.save_checkpoint('%s/checkpoint_best.pt' % self.run_dir)
+                            self.model.save_checkpoint('%s/checkpoint_best.pt' % self.run_dir,self.opt)
                         self.stats['val_losses'].append(val_loss)
                         self.stats['val_losses_ts'].append(t)
                     print('| saving checkpoint')
                     self.model.save_checkpoint('%s/checkpoint_iter%08d.pt' %
-                                                (self.run_dir, t))
-                    self.model.save_checkpoint(os.path.join(self.run_dir, 'checkpoint.pt'))
+                                                (self.run_dir, t),self.opt)
+                    self.model.save_checkpoint(os.path.join(self.run_dir, 'checkpoint.pt'),self.opt)
                     with open('%s/stats.json' % self.run_dir, 'w') as fout:
                         json_errors = {k: str(v) for k, v in self.stats.items()}
                         json.dump(json_errors, fout)
