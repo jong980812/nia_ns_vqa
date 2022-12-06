@@ -38,12 +38,14 @@ class BasketballtDataset(Dataset):
         self.concat_img = concat_img
         transform_list = [transforms.ToTensor()]
         self._transform = transforms.Compose(transform_list)
+        
     def __len__(self):
         return len(self.img_ids)
+    
     def __getitem__(self, idx):
         #! A01_AA01_T002_220916_CH01_X01_f001838.jpg
         img_name =self.img_ids[idx]+".jpg"
-        img = cv2.imread(os.path.join(self.img_dir,self.split, img_name), cv2.IMREAD_COLOR)#! self.split으로 폴더 접근.
+        img = cv2.imread(os.path.join(self.img_dir, self.split, img_name), cv2.IMREAD_COLOR)#! self.split으로 폴더 접근.
         img = self._transform(img)#@ transforms.ToTensor()
         label = -1 #@ feature vec이 없을때를 대비해서 -1로.
         if self.feat_vecs is not None:
