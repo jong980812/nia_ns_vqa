@@ -74,7 +74,7 @@ class AttributeNetwork(nn.Module):
     def train_mode(self):
         self.net.train()
 
-    def save_checkpoint(self, save_path):
+    def save_checkpoint(self, save_path,opt):
         checkpoint = {
             'input_channels': self.input_channels,
             'output_dim': self.output_dim,
@@ -82,7 +82,7 @@ class AttributeNetwork(nn.Module):
         }
         torch.save(checkpoint, save_path)
         if self.use_cuda:
-            self.net.cuda(self.gpu_ids[0])
+            self.net.cuda(opt.gpu)
 
     def _to_var(self, x):
         if self.use_cuda:
