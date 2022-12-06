@@ -27,8 +27,9 @@ class BasketballtDataset(Dataset):
                 max_id -= 1
 
         self.obj_masks = anns['object_masks'][min_id: max_id]
-        self.img_ids = anns['image_idxs'][min_id: max_id]
-        self.cat_ids = anns['category_idxs'][min_id: max_id]
+        self.img_name = anns['image_name'][min_id: max_id]
+        self.img_ids = anns['image_idxs'][min_id:max_id]
+        # self.cat_ids = anns['category_idxs'][min_id: max_id]
         if anns['feature_vectors'] != []: #@ feature vec을 np.array로 바꿔줌.
             self.feat_vecs = np.array(anns['feature_vectors'][min_id: max_id]).astype(float)
         else:
@@ -40,18 +41,18 @@ class BasketballtDataset(Dataset):
         self._transform = transforms.Compose(transform_list)
         
     def __len__(self):
-        return len(self.img_ids)
-    
+        return len(self.name)
     def __getitem__(self, idx):
         #! A01_AA01_T002_220916_CH01_X01_f001838.jpg
-        img_name =self.img_ids[idx]+".jpg"
-        img = cv2.imread(os.path.join(self.img_dir, self.split, img_name), cv2.IMREAD_COLOR)#! self.split으로 폴더 접근.
+        img_name =self.img_name[idx]+".jpg"
+        img = cv2.imread(os.path.join(self.img_dir,self.split, img_name), cv2.IMREAD_COLOR)#! self.split으로 폴더 접근.
         img = self._transform(img)#@ transforms.ToTensor()
         label = -1 #@ feature vec이 없을때를 대비해서 -1로.
         if self.feat_vecs is not None:
             label = torch.Tensor(self.feat_vecs[idx])
-        img_id = self.img_ids[idx]
-        cat_id = self.cat_ids[idx]
+        
+        # img_id = self.img_ids[idx]
+        # cat_id = self.cat_ids[idx]
        
 ##########! 마스크는 박스로 불러와서 후처리. ####################################
         # mask = torch.Tensor(mask_util.decode(self.obj_masks[idx]))
@@ -73,4 +74,4 @@ class BasketballtDataset(Dataset):
             data = img.clone().resize_.fill_(0)
             data[:, :, :] = transforms.Compose(transform_list)(seg)
 
-        return data, label, img_id, cat_id
+        return data, label, img_id
