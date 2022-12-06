@@ -73,4 +73,4 @@ class BasketballtDataset(Dataset):
             data = img.clone().resize_.fill_(0)
             data[:, :, :] = transforms.Compose(transform_list)(seg)
 
-        return data, label, img_id
+        return data, label
