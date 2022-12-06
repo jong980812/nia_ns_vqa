@@ -18,6 +18,8 @@ class BaseOptions():
 
         self.parser.add_argument('--clevr_mini_img_dir', default='../../data/raw/CLEVR_mini/images', type=str, help='clevr-mini image directory')
         self.parser.add_argument('--clevr_mini_ann_path', default='../../data/attr_net/objects/clevr_mini_objs.json', type=str, help='clevr-mini objects annotation file')
+        self.parser.add_argument('--basketball_img_dir', default='/local_datasets/detectron2/basketball/jpg', type=str)
+        self.parser.add_argument('--basketball_ann_path', default='/data/ahngeo11/nia/attnet/annotations/basketball_obj.json', type=str)
         
         self.parser.add_argument('--concat_img', default=1, type=int, help='concatenate original image when sent to network')
         self.parser.add_argument('--split_id', default=3500, type=int, help='splitting index between train and val images')

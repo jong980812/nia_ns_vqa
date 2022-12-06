@@ -39,7 +39,7 @@ class AttributeNetwork(nn.Module):
         # self.use_cuda = len(opt.gpu_ids) > 0 and torch.cuda.is_available()
         # self.gpu_ids = opt.gpu_ids
         # if self.use_cuda:
-        #     self.net.cuda(opt.gpu_ids[0])
+        #     self.net.cuda(opt.gpu_ids[0])       
         self.use_cuda=True
         self.input, self.label = None, None
                 
@@ -82,7 +82,7 @@ class AttributeNetwork(nn.Module):
         }
         torch.save(checkpoint, save_path)
         if self.use_cuda:
-            self.net.cuda(self.gpu_ids[0])
+            self.net.cuda(torch.device("cuda")) 
 
     def _to_var(self, x):
         if self.use_cuda:

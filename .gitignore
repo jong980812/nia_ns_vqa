@@ -1,7 +1,6 @@
 data/
 .vscode/
 read_pkl.py
-*.sh
 *.pkl
 *.out
 *.err
@@ -11,3 +10,5 @@ mask_rcnn/
 .vscode/
 results/
 *.txt
+annoations/json_ls.txt
+annoations/basketball_except_ls.txt
