@@ -5,8 +5,10 @@ read_pkl.py
 *.out
 *.err
 *.pth
+*.pt
 mask_rcnn/
 *.pyc
+__pycache__/
 .vscode/
 results/
 *.txt
