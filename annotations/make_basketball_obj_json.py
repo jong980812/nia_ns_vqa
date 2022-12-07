@@ -50,10 +50,16 @@ att_bind = {
 
 except_list = []
 
-with open("/data/ahngeo11/nia/attnet/annotations/json_ls.txt", 'r') as f :
-    json_list = f.readlines()
+with open("/data/ahngeo11/nia/attnet/annotations/train_ls.txt", 'r') as f :
+    train_list = f.readlines()
+    for i in range(len(train_list)) :
+        train_list[i] = train_list[i].split(".")[0]
+        
+with open("/data/ahngeo11/nia/attnet/annotations/val_ls.txt", 'r') as f :
+    val_list = f.readlines()
 
-root_dir = "/local_datasets/detectron2/basketball"
+json_list = train_list + val_list
+root_dir = "/local_datasets/detectron2/basketball/annotations"
 
 object_masks_list = []
 image_idxs_list = []
@@ -62,8 +68,15 @@ feature_vectors_list = []
 scores_list = []
 
 for img_id, line in enumerate(json_list) :
-    line = line[:-1]   ### remove \n
-    with open(root_dir + "/json/" + line + ".json", 'r') as f :
+    
+    if img_id < 15315 :
+        split = "/train_json/"
+    else :
+        split = "/val_json/"
+    
+    line = line.strip('\n')
+    
+    with open(root_dir + split + line + ".json", 'r') as f :
         data = json.load(f)
     
     # for i, obj in data["annotations"] :  ### 10 objects in one json file, data["ann"][0] = {dict}

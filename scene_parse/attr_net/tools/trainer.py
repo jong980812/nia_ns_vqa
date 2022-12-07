@@ -2,7 +2,7 @@ import os
 import json
 import torch
 import utils as utils
-
+import numpy as np
 
 class Trainer:
 
@@ -31,7 +31,7 @@ class Trainer:
         epoch = 0
         while t < self.num_iters:
             epoch += 1
-            for data, label, _, _ in self.train_loader:
+            for data, label in self.train_loader:
                 t += 1
                 self.model.set_input(data, label)
                 self.model.step()
@@ -69,11 +69,17 @@ class Trainer:
         self.model.eval_mode()
         loss = 0
         t = 0
-        for x, y, _, _ in self.val_loader:
+        acc = 0
+        for x, y in self.val_loader:
+            _y=y.detach().cpu().numpy()
             self.model.set_input(x, y)
-            self.model.forward()
+            self.model.forward() 
+            prediction=self.model.pred.detach().cpu().numpy()
+            acc+=np.mean(prediction==_y)
             loss += self.model.get_loss()
             t += 1
+        acc/=len(self.val_loader)
+        print(f"The Validation Accuracy is {acc}")
         self.model.train_mode()
         return loss / t if t != 0 else 0
 

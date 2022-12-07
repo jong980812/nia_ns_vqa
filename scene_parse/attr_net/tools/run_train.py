@@ -1,5 +1,3 @@
-import sys
-sys.path.append("/data/jongseo/lab/ns-vqa/scene_parse/attr_net/datasets")
 from options import get_options
 from datasets import get_dataloader,get_dataset
 from model import get_model

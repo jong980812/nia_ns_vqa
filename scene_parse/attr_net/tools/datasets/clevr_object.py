@@ -72,4 +72,4 @@ class ClevrObjectDataset(Dataset):
             data = img.clone().resize_(3, 224, 224).fill_(0)
             data[:, 38:187, :] = transforms.Compose(transform_list)(seg)
 
-        return data, label, img_id, cat_id
+        return data, label
