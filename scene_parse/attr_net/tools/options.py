@@ -1,6 +1,6 @@
 import argparse
 import os
-import utils
+import utils as utils
 import torch
 
 
@@ -18,15 +18,24 @@ class BaseOptions():
 
         self.parser.add_argument('--clevr_mini_img_dir', default='../../data/raw/CLEVR_mini/images', type=str, help='clevr-mini image directory')
         self.parser.add_argument('--clevr_mini_ann_path', default='../../data/attr_net/objects/clevr_mini_objs.json', type=str, help='clevr-mini objects annotation file')
+        self.parser.add_argument('--basketball_img_dir', default='/local_datasets/detectron2/basketball/jpg', type=str)
+        self.parser.add_argument('--basketball_ann_path', default='/data/ahngeo11/nia/attnet/annotations/basketball_obj.json', type=str)
         
         self.parser.add_argument('--concat_img', default=1, type=int, help='concatenate original image when sent to network')
         self.parser.add_argument('--split_id', default=3500, type=int, help='splitting index between train and val images')
         self.parser.add_argument('--batch_size', default=50, type=int, help='batch size')
-        self.parser.add_argument('--num_workers', default=8, type=int, help='number of workers for loading')
+        self.parser.add_argument('--num_workers', default=4, type=int, help='number of workers for loading')
         self.parser.add_argument('--learning_rate', default=0.002, type=float, help='learning rate')
-
+        #@@@@@@@@@@@@@@@@@@@@@@@@@      DONT TOUCH@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        self.parser.add_argument('--world_size', default=1, type=int,
+                        help='number of distributed processes')
+        self.parser.add_argument('--local_rank', type=int)
+        self.parser.add_argument('--dist_url', default='env://',
+                        help='url used to set up distributed training')
+        
         self.initialized = True
-
+        #@@@@@@@@@@@@@@@@@@@@@@@@@      DONT TOUCH@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        
     def parse(self):
         # initialize parser
         if not self.initialized:
@@ -34,16 +43,16 @@ class BaseOptions():
         self.opt = self.parser.parse_args()
 
         # parse gpu id list
-        str_gpu_ids = self.opt.gpu_ids.split(',')
-        self.opt.gpu_ids = []
-        for str_id in str_gpu_ids:
-            if str_id.isdigit() and int(str_id) >= 0:
-                self.opt.gpu_ids.append(int(str_id))
-        if len(self.opt.gpu_ids) > 0 and torch.cuda.is_available():
-            torch.cuda.set_device(self.opt.gpu_ids[0])
-        else:
-            print('| using cpu')
-            self.opt.gpu_ids = []
+        # str_gpu_ids = self.opt.gpu_ids.split(',')
+        # self.opt.gpu_ids = []
+        # for str_id in str_gpu_ids:
+        #     if str_id.isdigit() and int(str_id) >= 0:
+        #         self.opt.gpu_ids.append(int(str_id))
+        # if len(self.opt.gpu_ids) > 0 and torch.cuda.is_available():
+        #     torch.cuda.set_device(self.opt.gpu_ids[0])
+        # else:
+        #     print('| using cpu')
+        #     self.opt.gpu_ids = []
 
         # print and save options
         args = vars(self.opt)
@@ -69,9 +78,9 @@ class TrainOptions(BaseOptions):
 
     def initialize(self):
         BaseOptions.initialize(self)
-        self.parser.add_argument('--num_iters', default=30000, type=int, help='total number of iterations')
+        self.parser.add_argument('--num_iters', default=100, type=int, help='total number of iterations')
         self.parser.add_argument('--display_every', default=20, type=int, help='display training information every N iterations')
-        self.parser.add_argument('--checkpoint_every', default=2000, type=int, help='save every N iterations')
+        self.parser.add_argument('--checkpoint_every', default=20, type=int, help='save every N iterations')
         self.parser.add_argument('--shuffle_data', default=1, type=int, help='shuffle dataloader')
         self.is_train = True
 

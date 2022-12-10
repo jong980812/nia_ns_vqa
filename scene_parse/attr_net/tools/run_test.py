@@ -4,7 +4,7 @@ import json
 from scene_parse.attr_net.tools.options import get_options
 from datasets import get_dataloader
 from model import get_model
-import scene_parse.attr_net.utils as utils_parse.attr_net.tools.utils as utils
+import utils 
 
 
 COMP_CAT_DICT_PATH = 'tools/clevr_comp_cat_dict.json'

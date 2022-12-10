@@ -25,7 +25,7 @@ def get_feat_vec_clevr(obj):
         'large': 3,
         'small': 4,
         'metal': 5,
-        'rubber': 6,
+        'rubber': 6,        
         'blue': 7,
         'brown': 8,
         'cyan': 9,
