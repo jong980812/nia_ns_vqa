@@ -33,7 +33,7 @@ class Trainer:
             epoch += 1
             for data, label in self.train_loader:
                 t += 1
-                self.model.set_input(data, label)
+                self.model.set_input(data, label)#@ label= featur vectors
                 self.model.step()
                 loss = self.model.get_loss()
 
@@ -65,6 +65,7 @@ class Trainer:
                 if t >= self.num_iters:
                     break
 
+            
     def check_val_loss(self):
         self.model.eval_mode()
         loss = 0
@@ -82,7 +83,8 @@ class Trainer:
         print(f"The Validation Accuracy is {acc}")
         self.model.train_mode()
         return loss / t if t != 0 else 0
-
+     
 
 def get_trainer(opt, model, train_loader, val_loader=None):
+    #
     return Trainer(opt, model, train_loader, val_loader)
